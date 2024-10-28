@@ -1,0 +1,76 @@
+.ode-table-grid-container {
+    display: grid;
+    gap: 10px;
+    column-gap: 34px;
+}
+
+.ode-grid-item {
+    background-color: #ffffff;
+    padding: 3px;
+    border: 1.5px solid #bebebe;
+    border-radius: 8px;
+    position: relative;
+    box-shadow: #ccccccbb 0 0 5px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.table-header {
+    font-weight: bold;
+    background-color: #01142F;
+    border: none;
+    padding: 13px !important;
+    position: relative;
+    color: #fff;
+}
+
+.ode-grid-item-textarea {
+    height: 100%;
+    width: 100%;
+    border: none;
+    outline: none;
+    resize: vertical;
+    min-height: max-content;
+    padding: 10px;
+}
+
+.table-header::after {
+    content: "";
+    position: absolute;
+    right: -19px;
+    top: 5px;
+    width: 2px;
+    height: 0;
+    background-color: #dbdbdb;
+}
+
+.table-header.no-after::after {
+    display: none;
+}
+
+.right-relation-line::before {
+    content: "";
+    position: absolute;
+    right: -20.5px;
+    top: calc(50% - 20px);
+    height: 20px;
+    width: 13px;
+    border-right: 2px #dbdbdb solid;
+    border-bottom: 2px #dbdbdb solid;
+    border-radius: 0 0 10px 0;
+}
+
+.left-relation-line::before {
+    content: "";
+    position: absolute;
+    left: -18.5px;
+    top: calc(50% - 20px);
+    height: 20px;
+    width: 13px;
+    border-left: 2px #dbdbdb solid;
+    border-bottom: 2px #dbdbdb solid;
+    border-radius: 0 0  0 10px;
+}
+
+.ode-grid-item:focus-within {
+    border-color: #01142F;
+}
