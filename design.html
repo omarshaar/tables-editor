@@ -3,94 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Table Design with CSS Grid</title>
+    <title>Display JSON in Div</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            background-color: #f2f2f2;
-            padding: 20px;
-        }
-        .grid-item {
-            background-color: #ffffff;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-        }
-        .header {
-            font-weight: bold;
-            text-align: center;
-            background-color: #e6e6e6;
+        /* تنسيق نص JSON ليبدو منسقًا */
+        .json-container {
+            font-family: monospace;
+            white-space: pre-wrap;
             padding: 10px;
-            border-bottom: 2px solid #ccc;
-        }
-        /* تمديد الأعمدة عبر عدة صفوف بناءً على عدد التكرارات المفترض */
-        .span-4 {
-            grid-row: span 4;
-        }
-        .span-3 {
-            grid-row: span 3;
-        }
-        .span-2 {
-            grid-row: span 2;
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
 
+<div id="jsonDisplay" class="json-container"></div>
 
+<script>
+    const data = [
+        { "id": 1, "Schule": "HHEK", "Klasse": "ITV241", "schüler": "omar shaar" },
+        { "id": 1, "Schule": "HHEK", "Klasse": "ITV241", "schüler": "Thomas" },
+        { "id": 1, "Schule": "HHEK", "Klasse": "ITV241", "schüler": "John" },
+        { "id": 1, "Schule": "HHEK", "Klasse": "ITV241", "schüler": "Sara" },
+        { "id": 1, "Schule": "HHEK", "Klasse": "ITV241", "schüler": "Claus" },
+        { "id": 1, "Schule": "HHEK", "Klasse": "ITS11", "schüler": "Ali" },
+        { "id": 1, "Schule": "FRBS", "Klasse": "ITS11", "schüler": "Ali2" }
+    ];
 
-    <div class="grid-container">
-        <!-- رؤوس الأعمدة -->
-        <div class="grid-item header">Fach</div>
-        <div class="grid-item header">Themen</div>
-        <div class="grid-item header">Methoden und Sozialformen</div>
+    // تحويل الكائن إلى نص JSON منسق بمسافة 4 فراغات
+    const beautifiedJson = JSON.stringify(data, null, 4);
 
-        <!-- صفوف البيانات (مجرد مثال للتصميم) -->
-        <div class="grid-item span-4">Deutsch</div>
-        <div class="grid-item">Verortung der Filmhandlung</div>
-        <div class="grid-item">GA: Den Schauplatz des Films erarbeiten</div>
-
-        <div class="grid-item">Abenteuergeschichten</div>
-        <div class="grid-item">GA: Typische Merkmale einer Abenteuergeschichte</div>
-
-        <div class="grid-item">Tierfreundschaften</div>
-        <div class="grid-item">EA: Über eine eigene Tierfreundschaft schreiben</div>
-
-        <div class="grid-item">EA: Filme über Tierfreundschaften ansehen</div>
-
-        <div class="grid-item span-1">Lebenskunde/ Ethik/Religion</div>
-        <div class="grid-item">Belle und Sebastian</div>
-        <div class="grid-item">GA: Besprechen, weshalb der Hund Belle für Sebastian wichtig ist</div>
-
-        <div class="grid-item span-4">Sachkunde</div>
-        <div class="grid-item">Tierearten</div>
-        <div class="grid-item">EA: In Form eines Steckbriefs</div>
-
-        <div class="grid-item">Leben in den Bergen</div>
-        <div class="grid-item">GA: Zusammenfassen, was man in den Bergen sehen kann</div>
-
-        <div class="grid-item">Beruf Tiertrainer/in</div>
-        <div class="grid-item">EA/GA: Den Beruf eines Tiertrainers/in vorstellen</div>
-
-        <div class="grid-item">Recherche und Dokumentation</div>
-        <div class="grid-item">GA: Nach einem Tiertrainer/einer Tiertrainerin in der Nähe recherchieren</div>
-
-        <div class="grid-item span-3">Kunst</div>
-        <div class="grid-item">Bilder zeichnen</div>
-        <div class="grid-item">EA: Ein Bild von Belle und Sebastian zeichnen</div>
-
-        <div class="grid-item">Fotos und Collagen</div>
-        <div class="grid-item">EA: Fotos aus Zeitschriften ausschneiden</div>
-    </div>
+    // إضافة النص داخل عنصر div
+    document.getElementById("jsonDisplay").textContent = beautifiedJson;
+</script>
 
 </body>
 </html>

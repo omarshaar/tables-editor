@@ -2,6 +2,26 @@
     display: grid;
     gap: 10px;
     column-gap: 34px;
+    position: relative;
+}
+
+.add-row-btn {
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    width: 100%;
+    background-color: #cccccc5e;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bolder;
+    opacity: 0;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.add-row-btn:hover {
+    opacity: 1;
 }
 
 .ode-grid-item {
@@ -73,4 +93,34 @@
 
 .ode-grid-item:focus-within {
     border-color: #01142F;
+}
+
+.data-input {
+    width: 100%;
+    height: 40vh;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.json-viewer {
+    width: 100%;
+    height: 40vh;
+    padding: 20px;
+    border: 1px #01142F solid;
+    margin-bottom: 20px;
+    border-radius: 9px;
+}
+
+.json-container {
+    font-family: monospace;
+    white-space: pre-wrap;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    width: 100%;
+    height: 40vh;
+    overflow: auto;
 }

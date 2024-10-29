@@ -2,6 +2,7 @@ import { beiFeldAenderung, beiFocusIn } from "./dataController.js";
 
 let gLastValues       = {}; // Zum Verfolgen der letzten Werte für jedes Feld
 export let gFelder    = [];
+export let gConfig    = [];
 export let gTableData = [];
 export const gBenuzerOptions = {
     objectIDKey: "id"
@@ -18,6 +19,11 @@ export function erstelleTabelle(pConfig, pOptions, pListeners) {
 
     const { data: pData, containerSelector: pContainerSelector } = pConfig;
     const gContainer = document.querySelector(pContainerSelector);
+    
+    // set table data global
+    gTableData = pData;
+    gConfig    = pConfig;
+
     if (!gContainer) {
         console.error('Container für das Grid nicht gefunden');
         return;
@@ -46,6 +52,8 @@ export function erstelleTabelle(pConfig, pOptions, pListeners) {
 
     // Setzt den generierten Inhalt in das Container-Element
     gContainer.innerHTML = gGridContent;
+
+    gContainer.innerHTML += "<div class='add-row-btn'> + <div>";
 
     textareaListenersHinzufuegen(pContainerSelector);
 

@@ -26,18 +26,50 @@ export var daten = [
     { "id": 1, "Schule": "FRBS", "Klasse": "ITS11", "schüler": "Ali2" },
 ];
 
-// Nutzung der Bibliothek, um das Grid mit config zu erstellen
-const config = {
-    data: daten,
-    containerSelector: '.ode-table-grid-container'
-};
+/*************************************************************************************************
+**************************************************************************************************
+**************************************************************************************************/
 
-const options = {
-    objectIDKey: "id"
+window.onCrateTable = onCrateTable;
+window.onViewJson   = onViewJson;
+
+
+
+function onCrateTable() {
+    const dataInput = document.querySelector("#data-input");
+    const createBtn = document.querySelector("#create-table-btn");
+    const JsonBtn   = document.querySelector("#view-json-btn");
+
+    if (dataInput.value) {
+        daten = JSON.parse(dataInput.value);
+    }
+
+    const config = {
+        data: daten,
+        containerSelector: '.ode-table-grid-container'
+    };
+    
+    const options = {
+        objectIDKey: "id"
+    }
+    
+    const listeners = {
+        onChange: onChangeData
+    }
+
+    erstelleTabelle(config, options, listeners);
+
+    dataInput.classList.add("hide");
+    createBtn.classList.add("hide");
+    JsonBtn.classList.remove("hide");
 }
 
-const listeners = {
-    onChange: null
+function onViewJson() {
+    const beautifiedJson = JSON.stringify(daten, null, 4);
+    document.getElementById("jsonDisplay").textContent = beautifiedJson;
+    document.getElementById("jsonDisplay").classList.remove("hide");
 }
-// Aufruf der Funktion, um das Grid zu erstellen
-erstelleTabelle(config, options, listeners);
+
+function onChangeData(data) {
+    daten = data;
+}
