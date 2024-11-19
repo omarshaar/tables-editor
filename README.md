@@ -1,38 +1,41 @@
 
-# Craftify Table Library
+# Craftify Table Library Dokumentation
+
 
 ## Überblick
-Die **Craftify Table Library** ist eine JavaScript-Bibliothek, die es Ihnen ermöglicht, dynamische und interaktive Tabellen auf Ihrer Webseite zu erstellen. Mit Funktionen wie Datenmanipulation, Formatkonvertierung und Beziehungsverwaltung ist sie flexibel und leicht anzupassen.
 
----
+Die **Craftify Table Library** ist eine JavaScript-Bibliothek, die das Erstellen dynamischer und interaktiver Tabellen vereinfacht. Mit Funktionen wie Datenmanipulation, benutzerdefinierte Tabellenoptionen und Exportmöglichkeiten bietet die Bibliothek eine flexible Lösung für Entwickler.
+
 
 ## Funktionen
-- **Dynamische Tabellen**:
-  - Erstellen Sie Tabellen basierend auf JSON, CSV, TSV oder XML.
-  - Verwalten Sie Beziehungen zwischen Daten automatisch.
-- **Datenbearbeitung**:
-  - Zeilen hinzufügen, löschen und aktualisieren.
-  - Hierarchische Beziehungen zwischen Zellen verwalten.
-- **Formatkonvertierung**:
-  - Daten zwischen JSON, CSV, TSV und XML umwandeln.
-- **Anpassbares Design**:
-  - Verwenden Sie CSS-Variablen, um die Tabellen einfach anzupassen.
-- **Tastatursteuerung**:
-  - Nutzen Sie `Shift` für Mehrfachauswahl und `Delete` zum Löschen.
+1. **Dynamisches Tabellenrendering**:  
+   Erstellen Sie Tabellen basierend auf **JSON**, **CSV**, **TSV** oder **XML**. Die Bibliothek erkennt automatisch das Datenformat und konvertiert es bei Bedarf.
+
+2. **Anpassbare Optionen für ID-Schlüssel**:  
+   Jede Zeile in der Tabelle benötigt einen eindeutigen Schlüssel (`ID-Schlüssel`), um die Daten effizient zu verarbeiten. Standardmäßig ist dies `id`. Der Benutzer kann jedoch einen anderen Schlüssel angeben, falls die Datenstruktur einen anderen Namen verwendet.  
+   **Wichtig**: Der `ID-Schlüssel` wird aus dem Tabellenkopf ausgeschlossen, sodass er nicht in der Benutzeroberfläche angezeigt wird.
+
+3. **Ereignisgesteuerte Funktionen**:  
+   Reagieren Sie auf Benutzerinteraktionen wie das Bearbeiten von Daten, Hinzufügen oder Löschen von Zeilen und das Ändern von Beziehungen zwischen Tabellenzellen.
+
+4. **Datenexport**:  
+   Exportieren Sie die Tabelleninhalte in verschiedene Formate wie JSON, CSV, TSV oder XML.
+
+5. **Benutzerfreundliches Styling**:  
+   Verwenden Sie CSS-Variablen, um das Design einfach anzupassen.
 
 ---
 
 ## Installation
 
-### Dateien einbinden
-Stellen Sie sicher, dass die Bibliothek bereits in Ihrem Projektordner vorhanden ist. Sie müssen nur die Hauptdateien einbinden.
+### Einbindung der Bibliothek
 
-1. **JavaScript-Datei einfügen**
+1. **JavaScript-Datei**:
    ```html
    <script src="/path-to-library/craftify-table/index.js" type="module"></script>
    ```
 
-2. **CSS-Datei einfügen**
+2. **CSS-Datei**:
    ```html
    <link rel="stylesheet" href="/path-to-library/craftify-table/styles/index.css">
    ```
@@ -41,113 +44,170 @@ Stellen Sie sicher, dass die Bibliothek bereits in Ihrem Projektordner vorhanden
 
 ## Nutzung
 
-### Grundlegendes Beispiel
-```html
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Craftify Table Beispiel</title>
-    <link rel="stylesheet" href="/path-to-library/craftify-table/styles/index.css">
-</head>
-<body>
-    <div id="table-container"></div>
-    <script src="/path-to-library/craftify-table/index.js" type="module"></script>
-    <script>
-        const tableConfig = {
-            data: [
-                { id: 1, name: 'Anna', age: 29 },
-                { id: 2, name: 'Tom', age: 34 }
-            ],
-            containerSelector: '#table-container'
-        };
+### **Grundlegende Einrichtung**
 
-        createTable(tableConfig, {}, {});
-    </script>
-</body>
-</html>
+#### **HTML-Struktur**
+Erstellen Sie eine grundlegende Struktur in Ihrer HTML-Datei:
+```html
+<div id="data-input"></div>
+<button id="create-table-btn" onclick="onCrateTable()">Tabelle erstellen</button>
+<div id="jsonDisplay" class="hide"></div>
+<div class="ode-table-grid-container"></div>
 ```
 
 ---
 
-## Module
+### **JavaScript-Integration**
 
-### 1. Kernmodule (`core`)
-- **`bootstrap.js`**:
-  - Verbindet die Hauptfunktionen der Bibliothek.
-- **`GlobalScope.js`**:
-  - Speichert globale Variablen wie Daten und Konfigurationen.
-- **`ExposeToWindow.js`**:
-  - Stellt wichtige Funktionen im Browserfenster bereit.
+#### **Importieren der Funktionen**
+```javascript
+import { createTable, exportData } from "./craftify-table/index.js";
+```
 
-### 2. Tabellenfunktionen (`src`)
-#### Tabellenrendering
-- **`create-table/TableRenderer.js`**:
-  - Erstellt und aktualisiert die Tabelle dynamisch.
-
-#### Datenmanipulation
-- **`data-manipulations/DataController.js`**:
-  - Bearbeitet Zellen und fügt Zeilen hinzu.
-- **`data-manipulations/DeleteMananger.js`**:
-  - Löscht Zeilen und passt Beziehungen an.
-- **`data-manipulations/RelationsManager.js`**:
-  - Verwalten von Beziehungen zwischen Zellen.
-
-#### Formatkonvertierung
-- **`format-converter/formatConverter.js`**:
-  - Wandelt Datenformate um (JSON, CSV, TSV, XML).
-- **`format-converter/formatDetector.js`**:
-  - Erkennt das Format der Eingabedaten.
-
-#### Ereignisverwaltung
-- **`listeners/EventListeners.js`**:
-  - Reagiert auf Tastaturaktionen (z. B. `Shift`, `Delete`).
+#### **Daten initialisieren**
+Definieren Sie die Daten, die in der Tabelle angezeigt werden sollen (z. B. JSON, CSV, TSV oder XML):
+```javascript
+const data = [
+    { id: 1, schule: "HHEK", klasse: "ITV241", schüler: "Thomas" },
+    { id: 2, schule: "HHEK", klasse: "ITS11", schüler: "Sara" },
+    { id: 3, schule: "FRBS", klasse: "ITS11", schüler: "John" }
+];
+```
 
 ---
 
-### 3. Hilfsfunktionen (`utils`)
-- **`utils/ultis.js`**:
-  - Enthält nützliche Funktionen wie ID-Erzeugung, Sortieren und Berechnen von Prozentwerten.
+### **Konfiguration**
+
+Die **Konfiguration** definiert, wie die Tabelle gerendert wird. Beispiel:
+```javascript
+const config = {
+    data: data, // Unterstützt JSON, CSV, TSV oder XML
+    containerSelector: '.ode-table-grid-container'
+};
+```
 
 ---
 
-### 4. Styles (`styles`)
-- **`styles/index.css`**:
-  - Verbindet die Haupt-Styles.
-- **`styles/Theme.css`**:
-  - Definiert Farben, Abstände und Schriftarten.
-- **`styles/Components.css`**:
-  - Enthält detaillierte Tabellen-Styles.
-- **`styles/Global.css`**:
-  - Globale Stile wie das Ausblenden von Scrollbars.
+### **Optionen**
+
+Die **Optionen** legen zusätzliche Einstellungen fest, z. B. Kopfzeilen oder die ID-Schlüssel:
+```javascript
+const options = {
+    objectIDKey: "id", // Der Schlüssel für die eindeutige ID jeder Zeile (standardmäßig "id").
+    headers: {
+        schule: "Schule", // Benutzerdefinierte Kopfzeile für "schule".
+        klasse: "Klasse",
+        schüler: "Schüler"
+    }
+};
+```
+
+- **`objectIDKey`**:  
+   Dieser Schlüssel wird verwendet, um die eindeutige ID jeder Zeile zu definieren. Wenn Ihre Daten beispielsweise `rowID` statt `id` verwenden, setzen Sie `objectIDKey: "rowID"`.  
+   **Hinweis**: Der Schlüssel wird im Tabellenkopf automatisch ausgeblendet.
+
+- **`headers`**:  
+   Mit diesem Parameter können Sie die Bezeichnungen der Spalten anpassen.
 
 ---
 
-## API-Referenz
+### **Event Listeners**
 
-### createTable(config, listeners, options)
-- **Beschreibung**: Erstellt eine Tabelle im angegebenen Container.
-- **Parameter**:
-  - `config`: Tabellenkonfiguration (Daten, Container).
-  - `listeners`: Ereignislistener (z. B. `onChange`).
-  - `options`: Zusätzliche Optionen für benutzerdefinierte Einstellungen.
+Mit **Event Listeners** können Sie auf Benutzerinteraktionen reagieren:
+```javascript
+const listeners = {
+    onChange: (editedData, newDataSet, targetColumn) => {
+        console.log("Daten geändert:", editedData);
+    },
+    onDatasetRemove: (removedDataSet, newDataSet) => {
+        console.log("Daten entfernt:", removedDataSet);
+    },
+    onRelationChange: (editedItems, newDataSet, relationKey) => {
+        console.log("Beziehungen aktualisiert:", editedItems);
+    },
+    onAddNewRow: (addedItemsIDs, newDataSet) => {
+        console.log("Neue Zeile hinzugefügt:", addedItemsIDs);
+    }
+};
+```
+
+- **`onChange`**: Wird aufgerufen, wenn eine Zelle bearbeitet wird.
+- **`onDatasetRemove`**: Wird ausgelöst, wenn eine Zeile gelöscht wird.
+- **`onRelationChange`**: Behandelt Änderungen von Beziehungen zwischen Zeilen.
+- **`onAddNewRow`**: Reagiert auf das Hinzufügen neuer Zeilen.
+
 ---
 
-## Styling
-Anpassung der Tabellen durch Überschreiben von CSS-Variablen:
-```css
-:root {
-  --primary: #2a9d8f;
-  --font-color: #264653;
-  --min-cell-height: 50px;
+### **Tabelle erstellen**
+
+Verwenden Sie die Funktion `createTable`, um die Tabelle zu rendern:
+```javascript
+createTable(config, listeners, options);
+```
+
+---
+
+## **Daten exportieren**
+
+Exportieren Sie die Tabellendaten in das gewünschte Format (z. B. JSON):
+```javascript
+function exportTableData(format) {
+    let exportedData = exportData(data, format);
+    if (format === "JSON") {
+        exportedData = JSON.stringify(JSON.parse(exportedData), null, 4);
+    }
+    console.log(exportedData);
 }
 ```
 
 ---
 
-## Lizenz
-Diese Bibliothek ist Open-Source und steht unter der MIT-Lizenz zur Verfügung. Nutzen und modifizieren Sie sie frei in Ihren Projekten.
+## **Code-Beispiel**
+
+Hier ist eine vollständige Implementierung:
+```javascript
+import { createTable, exportData } from "./craftify-table/index.js";
+
+const data = [
+    { id: 1, schule: "HHEK", klasse: "ITV241", schüler: "Thomas" },
+    { id: 2, schule: "HHEK", klasse: "ITS11", schüler: "Sara" },
+    { id: 3, schule: "FRBS", klasse: "ITS11", schüler: "John" }
+];
+
+const config = {
+    data: data,
+    containerSelector: '.ode-table-grid-container'
+};
+
+const options = {
+    objectIDKey: "id",
+    headers: {
+        schule: "Schule",
+        klasse: "Klasse",
+        schüler: "Schüler"
+    }
+};
+
+const listeners = {
+    onChange: (editedData, newDataSet, targetColumn) => {
+        console.log("Daten geändert:", editedData);
+    },
+    onDatasetRemove: (removedDataSet, newDataSet) => {
+        console.log("Daten entfernt:", removedDataSet);
+    },
+    onRelationChange: (editedItems, newDataSet, relationKey) => {
+        console.log("Beziehungen aktualisiert:", editedItems);
+    },
+    onAddNewRow: (addedItemsIDs, newDataSet) => {
+        console.log("Neue Zeile hinzugefügt:", addedItemsIDs);
+    }
+};
+
+createTable(config, listeners, options);
+```
 
 ---
 
+### **Fazit**
+
+Die Craftify Table Library bietet eine leistungsstarke Möglichkeit, dynamische und interaktive Tabellen in Ihren Projekten zu integrieren. Sie unterstützt verschiedene Datenformate und bietet flexible Optionen, um Tabellen an Ihre Anforderungen anzupassen. Die klare Trennung von Konfiguration, Optionen und Event Listeners macht die Bibliothek besonders benutzerfreundlich.
