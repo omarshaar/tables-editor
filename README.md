@@ -1,12 +1,12 @@
 
 # Craftify Table Library
 
--
+---
 
 ## Überblick
 Die **Craftify Table Library** ist eine JavaScript-Bibliothek, die es Ihnen ermöglicht, dynamische und interaktive Tabellen auf Ihrer Webseite zu erstellen. Mit Funktionen wie Datenmanipulation, Formatkonvertierung und Beziehungsverwaltung ist sie flexibel und leicht anzupassen.
 
--
+---
 
 ## Funktionen
 - **Dynamische Tabellen**:
