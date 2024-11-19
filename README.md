@@ -1,12 +1,12 @@
 
 # Craftify Table Library
 
----
+-
 
 ## Überblick
 Die **Craftify Table Library** ist eine JavaScript-Bibliothek, die es Ihnen ermöglicht, dynamische und interaktive Tabellen auf Ihrer Webseite zu erstellen. Mit Funktionen wie Datenmanipulation, Formatkonvertierung und Beziehungsverwaltung ist sie flexibel und leicht anzupassen.
 
----
+-
 
 ## Funktionen
 - **Dynamische Tabellen**:
@@ -134,23 +134,6 @@ Stellen Sie sicher, dass die Bibliothek bereits in Ihrem Projektordner vorhanden
   - `config`: Tabellenkonfiguration (Daten, Container).
   - `listeners`: Ereignislistener (z. B. `onChange`).
   - `options`: Zusätzliche Optionen für benutzerdefinierte Einstellungen.
-
-### convertToJSON(data)
-- **Beschreibung**: Konvertiert Daten in JSON.
-- **Parameter**:
-  - `data`: Daten im Format CSV, TSV, XML oder JSON.
-
-### convertFromJSON(data, format)
-- **Beschreibung**: Wandelt JSON in das gewünschte Format um.
-- **Parameter**:
-  - `data`: JSON-Daten.
-  - `format`: Ziel-Format (`CSV`, `TSV`, `XML`, `JSON`).
-
-### detectFormat(data)
-- **Beschreibung**: Erkennt das Format der Eingabedaten.
-- **Parameter**:
-  - `data`: Eingabedaten als String.
-
 ---
 
 ## Styling
